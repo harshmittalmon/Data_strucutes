@@ -1,0 +1,10 @@
+class node{
+	public: 
+	int data ;
+	node*next ;
+	public:
+	node(int x){
+		this->data = x;
+		next = NULL;
+	}
+};

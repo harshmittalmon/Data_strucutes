@@ -1,0 +1,50 @@
+void deletenode(node* &head ,node * &tail,int pos ){
+
+    if(pos==1){
+
+        node* temp = head;
+
+        head = head->add;
+
+        temp->add= NULL;
+
+        delete temp;
+
+    }
+    else{
+
+        node* temp=NULL ;
+ 
+       node* curr= head;
+
+        for(int i=1;i<pos;i++){
+
+            temp  = curr;
+
+            curr= curr->add;
+
+        }
+
+        if(curr->add ==NULL){
+
+            temp-> add= curr->add;
+
+            curr->add = NULL;
+
+            delete curr;
+
+            tail= temp;
+
+            return;
+
+        }
+
+        temp-> add = curr-> add;
+
+        curr->add =NULL;
+
+        delete curr;
+
+    }
+
+}

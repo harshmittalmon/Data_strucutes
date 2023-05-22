@@ -1,0 +1,51 @@
+void insertionathead(node* &head ,int x){
+
+    node* temp = new node(x);
+
+    temp-> add= head ;
+
+    head= temp;
+
+}
+
+void insertionattail(node* &tail,int x){
+
+    node* temp = new node(x);
+
+    tail->add= temp;
+
+    tail = temp;
+
+}
+void insertioninmiddle(node*& head ,node*&tail,int pos,int x ){
+
+    if(pos==1){
+ 
+       insertionathead(head,x);
+   
+       return;
+   
+    }
+    
+    node* temp = head;
+
+    node*temp2= new node(x);
+
+    for(int i=1;i<pos-1 ;i++){
+
+        temp=temp->add;
+
+    }
+
+    if(temp->add ==NULL){
+
+        insertionattail(tail,x);
+
+        return;
+
+    }
+
+    temp2->add= temp-> add;
+    temp->add= temp2;
+
+}

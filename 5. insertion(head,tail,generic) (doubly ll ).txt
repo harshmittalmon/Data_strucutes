@@ -1,0 +1,137 @@
+//all test cases : when list is there and we have to insert and also , if we don't have LL then hwo we can insert at head or tail . 
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+class node{
+
+    public:
+ 
+   int data; node *next;
+node *prev ;
+
+    public:
+ 
+    node(int x){
+
+        this-> data = x;
+
+        this-> next = NULL;
+
+        this-> prev = NULL;
+
+    }
+    ~node(){
+
+        if(next!=NULL){
+
+            int data = this->data;
+
+            delete next ,prev;
+
+            next= NULL,prev= NULL;
+
+            cout <<endl<< "both prev and next for the data : "<<data<< " is deleted"<<endl;
+
+        }
+        cout <<endl<< prev->data<< endl;
+
+        cout <<endl<< "both prev and next for the data : "<<data<< " is deleted"<<endl;
+
+    }
+
+
+};
+
+
+
+void insertionathead(node* &head,node * &tail ,int x){
+
+    if (head==NULL){
+
+        node* temp = new node(x);
+
+        head= temp;
+
+        tail = temp;
+
+        return ;
+
+    }
+
+    node * temp= new node(x);
+
+    temp->next = head;
+
+    head->prev = temp;
+
+    head = temp;
+
+    cout << endl;
+
+    
+}
+
+void insertionattail(node* & head,node* &tail,int x){
+    if (tail==NULL){
+        node* temp =new node(x);
+        head= temp;
+        tail = temp;
+        return;
+    }
+    node * temp = new node(x);
+    tail->next = temp ;
+    temp->prev = tail;
+    tail =temp;
+    
+}
+
+
+
+
+void insertioninmiddle(node*& head ,node*&tail,int pos,int x ){
+
+    if(pos==1){
+
+        insertionathead(head,tail,x);
+
+        return ;
+
+    }
+
+    node* temp= head;
+
+    int cnt =1;
+
+    while(cnt < pos-1){
+
+        temp = temp->next;cnt++;
+
+    }
+
+    
+    if(temp->next ==NULL ){
+
+        node* temp2=new node(x);
+
+        tail->next = temp2;
+
+        temp2->prev = tail;
+
+        tail = temp2;
+
+        return;
+
+    }
+
+    node * temp2 = new node(x);
+
+    temp2->next = temp->next;
+
+    temp2->prev = temp;
+
+	temp->next = temp2;
+
+    temp->next->prev = temp2;
+}
