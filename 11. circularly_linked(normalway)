@@ -1,0 +1,15 @@
+bool isCircular(Node *head) {
+  if (head == NULL)
+    return true;
+  Node * temp = head->next;
+  unordered_map< Node*,int> mp;
+  mp[head]=2;
+  while(temp!=NULL){
+    if(mp[temp]==2) return true;
+    else if(mp[temp]==1) return false;
+    mp[temp]=1;
+    temp=temp->next; 
+  }
+  return false;
+  
+}
