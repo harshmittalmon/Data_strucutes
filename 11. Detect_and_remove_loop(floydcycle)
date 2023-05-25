@@ -1,0 +1,12 @@
+Node *removeLoop(Node *head){
+        Node * loopstart = getloopstart(head);
+        Node * temp = loopstart;
+        if(temp == NULL ){
+            return head;
+        }
+        while(temp->next != loopstart){
+            temp= temp->next;
+        }
+        temp->next = NULL ;
+        return head;
+}
