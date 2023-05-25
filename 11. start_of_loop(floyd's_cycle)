@@ -1,0 +1,22 @@
+    bool checkloop(ListNode* head,ListNode* &slow,ListNode* &fast){
+        if(head == NULL) return NULL;        
+        while(fast != NULL && fast->next != NULL){
+            slow = slow->next;
+            fast = fast->next->next;
+            if(slow == fast ) return true;
+        }
+        return false;
+    }
+    ListNode *detectCycle(ListNode *head) {
+        ListNode * slow = head;
+        ListNode * fast = head;
+        if(checkloop(head,slow,fast)){
+            ListNode * fast = head;
+            while(fast != slow){
+                fast = fast->next;
+                slow = slow->next;
+            }
+            return fast ;
+        }
+        return NULL ;
+    }
