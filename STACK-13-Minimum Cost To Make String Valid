@@ -1,0 +1,17 @@
+#include <bits/stdc++.h>
+void solve(stack<int> &s, int count, int size) {
+  if (count == size / 2){
+   s.pop();
+  return;
+  }
+  int ele = s.top();
+  s.pop();
+  solve(s,count+1,size);
+  s.push(ele);
+}
+void deleteMiddle(stack<int>&inputStack, int N){
+	
+   // Write your code here
+   
+   solve(inputStack,0,N);   
+}
