@@ -1,0 +1,34 @@
+#include <bits/stdc++.h> 
+
+void insert_right(stack<int>&stack,int ele){
+    if(stack.empty()==true|| stack.top()<=ele){
+  stack.push(ele);
+  return;
+}
+    int el=stack.top();
+    stack.pop();
+    insert_right(stack,ele);
+    stack.push(el);
+}
+void solve(stack<int> &stack){
+    if(stack.empty()){
+        return ;
+    }
+
+      int ele = stack.top();
+      stack.pop();
+      solve(stack);
+      insert_right(stack, ele);
+    
+}
+
+void sortStack(stack<int> &stack)
+{
+	if(stack.empty())return ;
+    solve(stack);
+}
+
+
+
+
+
