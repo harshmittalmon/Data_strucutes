@@ -1,0 +1,14 @@
+void func(Node* root,vector<int> &ans){
+    if(root==NULL) return;
+    ans.push_back(root->data);
+    func(root->left,ans);
+    func(root->right,ans);
+}
+//Function to return a list containing the preorder traversal of the tree.
+vector <int> preorder(Node* root)
+{
+  // Your code here
+  vector<int> ans;
+  func(root,ans);
+  return ans;
+}
