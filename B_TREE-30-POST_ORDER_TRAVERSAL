@@ -1,3 +1,4 @@
+method 1 recursion tc = oc = 0(n)
 class Solution {
 public:
     void func(TreeNode * root,vector<int> &ans){
@@ -16,7 +17,7 @@ public:
 
 
 
-METHOD 2 
+METHOD 2  sc = o(2h) tc = o(n)
 class Solution {
 public:
     void func(TreeNode * root,vector<int> &ans){
@@ -43,3 +44,48 @@ public:
         return ans;    
     }
 };
+
+
+
+METHOD 3 USING ONE STACK ONLY  tc= 0(2n) sc = 0(h) h = depth of tree
+class Solution {
+public:
+    void func(TreeNode * root,vector<int> &ans){
+        if (root == NULL) return ;
+        stack<TreeNode*> st;
+        TreeNode * curr = root;
+        TreeNode * temp = NULL ;
+        while(!st.empty() or curr!=NULL ){
+            if(curr==NULL){
+                temp = st.top()->right;
+                if(temp!=NULL){
+                    curr= temp;
+                }
+                else{
+                    temp = st.top();
+                    st.pop();
+                    ans.push_back(temp->val);
+                    while(!st.empty() and temp==st.top()->right){
+                        
+                        temp = st.top();
+                        st.pop();
+                        ans.push_back(temp->val);
+                        
+                    }
+                }
+            }
+            else{
+                st.push(curr);
+                curr=curr->left;
+            }
+            
+        }
+        
+    }
+    vector<int> postorderTraversal(TreeNode* root) {
+        vector<int> ans;
+        func(root,ans);
+        return ans;    
+    }
+};
+
