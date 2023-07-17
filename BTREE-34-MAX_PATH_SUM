@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int maxi=INT_MIN;
+    int tree_ht(TreeNode * root,int &maxi){
+        if(root == NULL)return 0;
+        int lsum = tree_ht(root->left,maxi);
+        int rsum = tree_ht(root->right,maxi);
+        lsum<0? lsum=0:lsum;
+        
+        rsum<0? rsum=0:rsum;
+        //or int lsum = max(0,tree_ht(root->left,maxi))
+        maxi= max(maxi,lsum+rsum+root->val);
+        return root->val + max(lsum,rsum);
+    }
+    int maxPathSum(TreeNode* root) {
+        tree_ht(root,maxi);
+        return maxi;
+    }
+};
