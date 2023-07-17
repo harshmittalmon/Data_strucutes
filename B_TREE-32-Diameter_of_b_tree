@@ -1,0 +1,14 @@
+public:
+    int maxi=0;
+    int tree_ht(TreeNode * root,int &maxi){
+        if(root == NULL)return 0;
+        int lh= tree_ht(root->left,maxi);
+        int rh= tree_ht(root->right,maxi);
+        maxi= max(maxi,lh+rh);
+        return (1+max(lh,rh));
+    }
+    int diameterOfBinaryTree(TreeNode* root) {
+        tree_ht(root,maxi);
+        return maxi;
+    }
+};
