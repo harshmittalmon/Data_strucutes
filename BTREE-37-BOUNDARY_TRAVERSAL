@@ -1,0 +1,61 @@
+
+class Solution {
+public:
+    bool isleaf(Node * root  ){
+        if(root -> left == NULL && root -> right == NULL )return true;
+        return false;
+    }
+    
+    void leftboundary(Node * root , vector<int> &ans){
+        Node * temp  = root -> left;
+        while(temp){
+            if(!isleaf(temp))ans.push_back(temp->data);
+            if(temp -> left) temp = temp -> left;
+            else temp = temp -> right ;
+        }
+        
+        
+        
+    }
+    
+    void leaves(Node * temp , vector< int > & ans){
+        if(isleaf(temp)){
+            ans.push_back(temp->data);
+            return;
+        }
+        if(temp->left)leaves(temp->left,ans);
+        if(temp->right ) leaves(temp->right,ans) ;
+    }
+    
+    
+    void rightboundary(Node * root, vector <int> & ans){
+        stack <int> st;
+        Node * temp=root->right;
+        while(temp){
+            if(!isleaf(temp))st.push(temp->data);
+            if(temp->right!=NULL)temp = temp-> right;
+            else temp=temp->left;
+        }
+        
+        while(!st.empty()){
+            int top = st.top();
+            st.pop();
+            ans.push_back(top);
+        }
+    }
+    vector <int> boundary(Node *root)
+    {
+        //Your code here
+        vector<int> ans;
+        if(root == NULL ) return ans;
+        
+        if(!isleaf(root))ans.push_back(root->data);
+        
+        leftboundary(root,ans);
+        leaves(root,ans);
+        rightboundary(root,ans);
+        return ans;
+        
+        
+    }
+};
