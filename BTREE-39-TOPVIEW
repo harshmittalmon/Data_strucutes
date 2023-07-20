@@ -1,0 +1,42 @@
+
+// } Driver Code Ends
+/*
+struct Node
+{
+    int data;
+    Node* left;
+    Node* right;
+};
+*/
+class Solution
+{
+    public:
+    //Function to return a list of nodes visible from the top view 
+    //from left to right in Binary Tree.
+    vector<int> topView(Node *root)
+    {
+        //Your code here
+        vector<int> ans;
+        queue<pair<Node*,int>> q;
+        map<int,int> order;
+        q.push({root,0});
+        while(!q.empty()){
+            auto temp = q.front();
+            q.pop();
+            Node * node = temp.first;
+            int vert = temp.second;
+            if(order.find(vert)==order.end()){
+                order.insert({vert,node->data});
+                
+            }
+            if(node->left)q.push({node->left,vert-1});
+            if(node->right)q.push({node->right,vert+1});
+        }
+        for(auto &i : order){
+            ans.push_back(i.second);
+        }
+        return ans;
+    }
+
+};
+
