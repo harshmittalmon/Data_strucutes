@@ -1,0 +1,36 @@
+class Solution {
+public:
+    int ans =0;
+    int lht(TreeNode * root){
+        int lt = 0;
+        while(root){
+            lt++;
+            root =root->left;
+        }
+        return lt;
+    }
+    int rht(TreeNode * root){
+        int rt=0;
+        while(root){
+            rt++;
+            root=root->right;
+        }
+        return rt;
+    }
+    
+    int solve(TreeNode* root){
+        if(root ==NULL)return 0;
+        
+        int lh =  lht(root);
+        int rh = rht(root);
+        
+        if(lh==rh) return (pow(2,lh)-1);
+        else return 1+solve(root->left)+solve(root->right);                
+    }
+    int countNodes(TreeNode* root) {
+        if(root ==NULL)return 0;
+        ans = solve(root);
+        
+        return ans;
+    }
+};
