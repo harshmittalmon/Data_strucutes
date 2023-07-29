@@ -1,0 +1,30 @@
+class Solution {
+public:
+
+vector<int> inorderTraversal(TreeNode * root) {
+vector<int> ans;
+TreeNode * temp = root;
+while(temp){
+    if(temp->left ==NULL){
+        ans.push_back(temp->val);
+        temp = temp->right;
+    }
+    else{
+        TreeNode * track = temp->left;
+        while(track->right && track->right!=temp){
+            track = track->right ;
+        }
+        if(track->right ==NULL){
+            track->right = temp;
+            temp = temp->left;
+        }
+        else{
+            ans.push_back(temp->val);
+            track->right = NULL;            
+            temp=temp->right;
+        }
+    }
+}
+return ans;   
+}
+};
