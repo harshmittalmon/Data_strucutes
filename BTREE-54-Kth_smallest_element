@@ -1,0 +1,19 @@
+class Solution {
+public:
+    TreeNode * ans(TreeNode*root,int &k){
+        if(root == NULL)return NULL;
+        TreeNode *  left = ans(root->left,k);
+        if(left)return left ;
+        k--;
+        if(k==0){
+            return root;
+        }
+        
+        TreeNode *  right = ans(root->right,k);
+        return right;
+    }
+    int kthSmallest(TreeNode* root, int &k) {
+        TreeNode * answer = ans(root,k);
+        return answer->val;
+    }
+};
