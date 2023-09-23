@@ -1,0 +1,76 @@
+//{ Driver Code Starts
+#include <bits/stdc++.h>
+using namespace std;
+
+// } Driver Code Ends
+class Solution {
+  public:
+    // Function to find the number of islands.
+    bool isokay(int i,int j,int n , int m ){
+        if(i>=0 and i<n and j>=0 and j<m){
+            return true;
+        }
+        return false;
+    }
+    
+    void bfs(vector<vector<char>> & grid , vector<vector<int>>&vis , int i , int j ){
+        vis[i][j]=1;
+        int n= grid.size(),m=grid[0].size();
+        queue<pair<int,int>> que;
+        que.push({i,j});
+        while(!que.empty()){
+            pair<int,int> pr = que.front();
+            que.pop();
+            int row = pr.first,col = pr.second;
+            for(int i=-1;i<=1;i++){
+                for(int j=-1;j<=1;j++){
+                    int newr=row+i,newc=col+j;
+                    if(isokay(newr,newc,n,m) and vis[newr][newc]==0 and grid[newr][newc]=='1'){
+                        vis[newr][newc]=1;
+                        que.push({newr,newc});
+                    }
+                }
+            }
+        }
+        
+    }
+    
+    
+    int numIslands(vector<vector<char>>& grid) {
+        int n = grid.size();
+        int m = grid[0].size();
+        int count =0;
+        vector<vector<int>> vis(n,vector<int>(m));
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(!vis[i][j] and grid[i][j]=='1'){
+                    count++;
+                    bfs(grid,vis,i,j);
+                }
+                
+            }
+        }
+        return count;
+    }
+};
+
+//{ Driver Code Starts.
+int main() {
+    int tc;
+    cin >> tc;
+    while (tc--) {
+        int n, m;
+        cin >> n >> m;
+        vector<vector<char>> grid(n, vector<char>(m, '#'));
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                cin >> grid[i][j];
+            }
+        }
+        Solution obj;
+        int ans = obj.numIslands(grid);
+        cout << ans << '\n';
+    }
+    return 0;
+}
+// } Driver Code Ends
