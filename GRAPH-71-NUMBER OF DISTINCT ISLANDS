@@ -1,0 +1,44 @@
+// User function Template for C++
+
+class Solution {
+  public:
+    set<vector<pair<int,int>>> s;
+    int row[4]= {-1,0,1,0};
+    int col[4]= {0,1,0,-1};
+    
+    bool isokay(int i,int j , int n , int m ){
+        return(    i>=0 and j>=0 and i< n and j < m);
+    }
+    
+    
+    void dfs(int i , int j , vector<vector<int>> & grid , vector<vector<int>> & vis,vector<pair<int,int>> & temp, pair<int,int> base ){
+        vis[i][j]=1;
+        temp.push_back({i-base.first,j-base.second});
+        int n=  grid.size(),m = grid[0].size();
+        for(int k=0;k<4;k++){
+            int nrow = i+row[k];
+            int ncol = j+col[k];
+            if(isokay(nrow,ncol,n,m) and !vis[nrow][ncol] and grid[nrow][ncol]==1){
+                dfs(nrow,ncol,grid,vis,temp,base);
+            }
+        }
+    }
+    int countDistinctIslands(vector<vector<int>>& grid) {
+        // code here
+        int n = grid.size(),m = grid[0].size();
+        vector<vector<int>> vis(n,vector<int> (m,0));
+        for(int i=0;i<n;i++){
+            for(int j= 0;j<m;j++){
+                vector<pair<int,int>> temp;
+                if(!vis[i][j] and grid[i][j]==1){
+                    
+                    pair<int,int> pr = {i,j};
+                    dfs(i,j,grid,vis,temp,pr);
+                    s.insert(temp);
+                }
+                
+            }
+        }
+        return s.size();
+    }
+};
